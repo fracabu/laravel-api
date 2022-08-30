@@ -81,8 +81,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel PARTE PUBBLICA
                 </div>
+
+                @auth
+                <h2>utente loggato {{Auth::user()->name}}</h2>
+                @endauth
+
+                @guest
+                <h2>utente non loggato</h2>
+                @endguest
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
