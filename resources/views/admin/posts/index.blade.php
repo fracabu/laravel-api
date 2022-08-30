@@ -27,10 +27,10 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->slug }}</td>
-                                <td>{{ $post->user->name }}</td>
+                                {{-- <td>{{ $post->user->name }}</td> --}}
                                 <td>
                                     <div>{{ $post->category ? $post->category->name : '' }}</div>
-                                    <div>{{ $post->tags->implode('name', ' - ') }}</div>
+                                    {{-- <div>{{ $post->tags->implode('name', ' - ') }}</div> --}}
                                 </td>
                                 <td>
                                     <a class="btn btn-info btn-sm"

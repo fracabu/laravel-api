@@ -31,7 +31,7 @@
                             <dd>{{ $post->content }}</dd>
 
                             <dt>Autore</dt>
-                            <dd>{{ $post->user->name }}</dd>
+                            {{-- <dd>{{ $post->user->name }}</dd> --}}
 
                             <dt>Categoria</dt>
                             <dd>
@@ -44,13 +44,13 @@
 
                             <dt>Tags</dt>
                             <dd>
-                                {{ $post->tags->implode('name', ' - ') }}
+                                {{-- {{ $post->tags->implode('name', ' - ') }} --}}
                                 {{-- @foreach ($post->tags as $tag)
-              {{ $tag->name }}
+            {{ $tag->name }}
 
-              @if (!$loop->last)
+            @if (!$loop->last)
                 <span> -</span>
-              @endif
+            @endif
             @endforeach --}}
                             </dd>
 
