@@ -31,15 +31,15 @@
                             <dd>{{ $post->content }}</dd>
 
                             <dt>Autore</dt>
-                            {{-- <dd>{{ $post->user->name }}</dd> --}}
+                            <dd>{{ $post->user->name }}</dd>
 
                             <dt>Categoria</dt>
                             <dd>
-                                @if ($post->category)
+                                {{-- @if ($post->category)
                                     <a href="{{ route('admin.categories.posts', $post->category_id) }}">
                                         {{ $post->category->name }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </dd>
 
                             <dt>Tags</dt>

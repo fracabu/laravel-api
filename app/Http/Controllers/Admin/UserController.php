@@ -20,9 +20,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        // if (Auth::user()->role !== "admin") {
-        //     abort(401);
-        // }
+        if (Auth::user()->role !== "admin") {
+            abort(401);
+        }
 
         $user = User::findOrFail($id);
 
@@ -31,9 +31,9 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // if (Auth::user()->role !== "admin") {
-        //     abort(401);
-        // }
+        if (Auth::user()->role !== "admin") {
+            abort(401);
+        }
 
         $data = $request->all();
         $user = User::findOrFail($id);

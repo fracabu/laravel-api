@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -57,18 +58,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy ("created_at" , "desc")->get();
-        return view ("admin.posts.index", compact ("posts"));
-    }
+        
+        $user = Auth::user();
+        //se l'utente ha ruolo admin
+        if ($user->role === "admin") 
+        {   //vede tutti i post in ordine di creazione discendente
+            $posts = Post::orderBy("created_at", "desc")->paginate(5);
+        } else {
+            //altrimenti vede solo i suoi
+            $posts = $user->posts;
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view ("admin.posts.create");
+        return view("admin.posts.index", compact("posts"));
     }
 
     /**
@@ -89,6 +90,7 @@ class PostController extends Controller
         $post=new Post();
         $post->fill($validatedData);
         $post->slug = $this->generateSlug($post->title);
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         //redirect su la view show
@@ -115,8 +117,16 @@ class PostController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
      */
-    public function edit($slug)
+    public function create()
+    {
+        // $categories = Category::all();
+        // $tags = Tag::all();
+
+        return view("admin.posts.create");
+    }
+     public function edit($slug)
     {
         
         $post = $this->findBySlug($slug);
