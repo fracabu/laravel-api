@@ -36,4 +36,6 @@ Route::get("/users", "UserController@Index")->name('users.index');
 Route::get("/users/{user}/edit", "UserController@edit")->name("users.edit");
 Route::patch("/users/{user}", "UserController@update")->name("users.update");
 
+Route::get("/categories/{category}/posts", "CategoryController@posts")->name("categories.posts");
+
 });

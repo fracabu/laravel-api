@@ -34,12 +34,13 @@
                             <dd>{{ $post->user->name }}</dd>
 
                             <dt>Categoria</dt>
+                            {{ $post->category->name }}
                             <dd>
-                                {{-- @if ($post->category)
+                                @if ($post->category)
                                     <a href="{{ route('admin.categories.posts', $post->category_id) }}">
                                         {{ $post->category->name }}
                                     </a>
-                                @endif --}}
+                                @endif
                             </dd>
 
                             <dt>Tags</dt>

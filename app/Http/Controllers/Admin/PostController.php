@@ -84,6 +84,9 @@ class PostController extends Controller
         $validatedData = $request->validate([
             "title" => "required|min:10",
             "content" => "required|min:10",
+            "category_id" => "nullable|exists:categories,id",
+            //"tags" => "nullable|exists:tags,id",
+            //"cover_img" => "required|image",
         ]);
 
         //Salvataggio dati a DB
