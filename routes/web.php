@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,6 @@ Route::middleware("auth")
 ->group(function(){
 Route::get('/', 'HomeController@index')-> name('index');
 Route::resource("posts", "PostController");
+
+Route::get("/users", "UserController@Index")->name('users.index');
 });
