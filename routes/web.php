@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +33,7 @@ Route::get('/', 'HomeController@index')-> name('index');
 Route::resource("posts", "PostController");
 
 Route::get("/users", "UserController@Index")->name('users.index');
+Route::get("/users/{user}/edit", "UserController@edit")->name("users.edit");
+Route::patch("/users/{user}", "UserController@update")->name("users.update");
+
 });
