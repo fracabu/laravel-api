@@ -66,9 +66,9 @@
                             class="form-control @error('category_id') is-invalid @enderror"
                             placeholder="Inserisci il titolo">
                             <option value=""></option>
-                            {{-- @foreach ($categories as $category)
+                            @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         @error('category_id')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ class PostController extends Controller
         return $post;
     }
 
-    private function generateSlug($text){
-        $toReturn=null;
+    private function generateSlug($text)
+    {
+        $toReturn = null;
         $counter = 0;
 
         do {
@@ -48,7 +50,6 @@ class PostController extends Controller
         } while ($slug_esiste);
 
         return $toReturn;
-
     }
 
     /**
@@ -58,11 +59,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        
+
         $user = Auth::user();
         //se l'utente ha ruolo admin
-        if ($user->role === "admin") 
-        {   //vede tutti i post in ordine di creazione discendente
+        if ($user->role === "admin") {   //vede tutti i post in ordine di creazione discendente
             $posts = Post::orderBy("created_at", "desc")->paginate(5);
         } else {
             //altrimenti vede solo i suoi
@@ -82,12 +82,12 @@ class PostController extends Controller
     {
         //validazione dati
         $validatedData = $request->validate([
-            "title"=>"required|min:10",
-            "content"=>"required|min:10",
+            "title" => "required|min:10",
+            "content" => "required|min:10",
         ]);
-    
+
         //Salvataggio dati a DB
-        $post=new Post();
+        $post = new Post();
         $post->fill($validatedData);
         $post->slug = $this->generateSlug($post->title);
         $post->user_id = Auth::user()->id;
@@ -95,7 +95,7 @@ class PostController extends Controller
 
         //redirect su la view show
 
-        return redirect()->route ("admin.posts.show", $post->slug);
+        return redirect()->route("admin.posts.show", $post->slug);
     }
 
 
@@ -109,7 +109,7 @@ class PostController extends Controller
     {
         $post = $this->findBySlug($slug);
 
-        return view ("admin.posts.show", compact("post"));
+        return view("admin.posts.show", compact("post"));
     }
 
     /**
@@ -121,17 +121,17 @@ class PostController extends Controller
      */
     public function create()
     {
-        // $categories = Category::all();
-        // $tags = Tag::all();
+        $categories = Category::all();
+        //$tags = Tag::all();
 
-        return view("admin.posts.create");
+        return view("admin.posts.create", compact("categories"));
     }
-     public function edit($slug)
+    public function edit($slug)
     {
-        
+
         $post = $this->findBySlug($slug);
 
-        return view ("admin.posts.edit", compact("post"));
+        return view("admin.posts.edit", compact("post"));
     }
 
     /**
@@ -142,7 +142,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
-    {   
+    {
         $validatedData = $request->validate([
             "title" => "required|min:10",
             "content" => "required|min:10",
@@ -153,11 +153,10 @@ class PostController extends Controller
             // genero un nuovo slug
             $post->slug = $this->generateSlug($validatedData["title"]);
 
-        $post->update($validatedData);
+            $post->update($validatedData);
 
-        return redirect()->route("admin.posts.show", $post->slug);
-    
-    }   
+            return redirect()->route("admin.posts.show", $post->slug);
+        }
     }
     /**
      * Remove the specified resource from storage.
