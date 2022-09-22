@@ -33,7 +33,7 @@
                     @csrf
                     @method('PUT')
 
-                    <file-input name="pippo"></file-input>
+                    <file-input></file-input>
                     {{-- <div class="form-group">
             <label for="cover_img_file" class="form-label">Immagine di copertina</label>
 
